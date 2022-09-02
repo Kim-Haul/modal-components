@@ -1,25 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Modal from "./commons/Modal";
+import styled from "styled-components";
 
 function App() {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <Wrap>
+        <button className="openBtn" onClick={openModal}>
+          모달팝업
+        </button>
+        <Modal open={modalOpen} close={closeModal} header="Modal heading">
+          리액트 모달을 띄워봅시다.
+        </Modal>
+      </Wrap>
+    </React.Fragment>
   );
 }
 
 export default App;
+
+const Wrap = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  .openBtn {
+    padding: 10px;
+    border-radius: 5px;
+    border: 0;
+    width: 20%;
+    height: 10%;
+    font-size: 3rem;
+    cursor: pointer;
+
+    &:hover {
+      outline: red solid 3px;
+    }
+  }
+`;
